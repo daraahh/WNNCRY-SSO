@@ -1,10 +1,11 @@
 ---
 title: Análisis de malware. WannaCry
+subtitle: Seguridad en Sistemas Operativos
 author:
-  - Álvaro García Jaén
-  - Darío Abad Tarifa
+  - Darío Abad Tarifa - darioabta@correo.ugr.es
+  - Álvaro García Jaén - alvarogj@correo.ugr.es
 lang: es
-geometry: margin=3cm
+geometry: "left=3cm,right=2cm,top=3cm,bottom=3cm"
 toc: True
 toc-own-page: True
 linkcolor: blue
@@ -22,19 +23,57 @@ Es común encontrar descripciones que definen este malware como un criptogusano,
 
 Dicha expansión se llevaba a cabo mediante el uso del exploit *EternalBlue*, que fue revelado por el grupo *The Shadow Brokers* el 14 de abril (1 mes antes del ataque). Dicho exploit se aprovecha de la vulnerabilidad *MS17-010* del protocolo *Server Message Block*. El detalle importante es que Microsoft liberó un parche para esta vulnerabilidad el 14 de marzo (2 meses antes del ataque), sin embargo, es probable que debido al poco margen de tiempo y la falta de concienciación dicha actualización no fuera aplicada en la mayoría de equipos. Una actualización que además no cubría versiones de Windows XP.
 
-Aunque es un ataque de gran gravedad, las consecuencias podrían haber sido peores si no se hubiera descubierto el *kill-switch* que detuvo la propagación o si hubiera sido un ataque dirigido a infraestructuras críticas, como centrales nucleares o eléctricas.
+Aunque es un ataque de gran gravedad, las consecuencias podrían haber sido peores si no se hubiera descubierto el *kill-switch* que detuvo la propagación o si hubiera sido un ataque dirigido a infraestructuras críticas, como centrales nucleares o eléctricas. Llamamos *kill-switch* al método que tiene un malware de parar su propagación. En el análisis qué hacía el WannaCry para saber si debía propagarse o no.
 
 En este documento se tratará el contexto que acompañaba al suceso, se documentará el funcionamiento del malware, se hablará del impacto que tuvo y la perspectiva actual que se tiene sobre los ataques ransomware. Además se comentarán las diferentes teorías sobre la, poco clara, autoría del ataque y se realizará un análisis técnico de una muestra del malware mediante técnicas de ingeniería inversa.
 
 # Antecedentes
 
-# Funcionamiento
+El término ransomware se volvió más y más conocido gracias al famoso WannaCry.
+Sin embargo, no debemos olvidar que el WannaCry es uno de tantos ransomware. En
+este punto veremos otros muchos que hubo y como fueron evolucionando hasta
+llegar a ser uno de los malware más temidos por muchas empresas.
 
-# Impacto
+Comenzamos nuestro viaje en 1989, cuando el doctor Joseph Popp, investigador del
+SIDA, difundió un troyano haciéndolo pasar por una aplicación que ayudaba a
+determinar el riesgo de una persona a contraer dicha enfermedad, por lo cual
+esta claro que los más perjudicados por este ataque sería el sistema sanitario. Este malware
+permanecía en el ordenador de la víctima de manera pasiva hasta que se activada
+y cifraba el nombre archivos de la máquina. Tenía una manera muy curiosa de activarse:
+contaba el número de veces que el sistema se había iniciado y, cuando el
+contador llevaba a 90, ya no había vuelta atrás. El autor intentaba cubrirse las
+espaldas afirmando que, cuando un usuario instalaba este programa, se
+comprometía a pagar la licencia del mismo y, si no lo hacía, tendría
+consecuencias como que "su ordenador dejará de funcionar como lo hace
+normalmente". A un nivel más técnico, la realidad es que se trataba de un
+malware bastante rudimentario. En ningún momento se cifraba el contenido de los
+archivos, sino que simplemente se cifraba su nombre. Esto hacía que su
+recuperación fuera muchísimo más asequible. Aún así, para la época, fue un gran
+ataque en un entorno que estaba poco preparado. Este ransomwere recibío el
+nombre de *AIDS Trojan* (troyano SIDA).
 
-# Atribución del ataque
+A raíz de este primer ataque, se desarrollaron otros ya más avanzados como el
+CryptoLocker. El primer ataque del que se tuvo constancia fue el 5 de septiembre
+de 2013 y hasta junio de 2014 no pudo mitigarse completamente. Afectaba, igual
+que el caso anterior, a sistemas Windows (DOS). Es lógico, puesto que la mayoría
+de usuarios finales utilizan Windows como sistema operativo, que son los
+objetivos últimos de estos ataques. Se propagó mediante correo electrónico y
+también mediante máquinas que previamente pertenecian a una botnet. Cifraba
+archivos tanto locales como también aquellos a los que podía llegar a través de
+la red donde estaba conectado el usuario mediante criptografía asimétrica (RSA).
+Esto hacía que, aunque se obteniera la clave con la que el atacante había
+cifrado la información de la víctima con técnicas como la ingeniería inversa o
+se conociera el *kill-switch* para parar el ransomware, no
+se pudieran recuperar los datos cifrados puesto que se necesitaba la clave privada que se
+mantenía en los servidores del atacante. 
 
-# Análisis técnico de una muestra
+
+# Funcionamiento del WannaCry
+
+A continuación, estudiaremos como funciona el WannaCry. Para ello, iremos
+directamente a la práctica para ver, a nivel de código, qué hacía y cómo.
+
+## Análisis técnico de una muestra
 
 Para el desarrollo de esta parte, se ha realizado un **análisis estático** de una muestra del malware que se encuentra en el repositorio the Github [*TheZoo*](https://github.com/ytisf/theZoo). Las principales herramientas usadas son:
 
@@ -94,10 +133,64 @@ Los archivos son los siguientes:
 
 Por tanto, el malware ejecutaría dos etapas previas al cifrado de archivos en las que realiza acciones que aseguran la persistencia del malware en el sistema y despliega los recursos empaquetados en lugares específicos que después son ejecutados para cifrar los archivos (*t.wnry*), informar a la víctima del secuestro (*u.wnry*) y expandirse a otros equipos mediante el exploit EternalBlue (*taskse.exe*). Este último ejecutable se comunicaría con el servicio creado en una etapa anterior, llamado *mssecvc2.0*, que intentaría enumerar sesiones RDP activas en busca de nuevos equipos.
 
+# Impacto
+
+Como ya hemos mencionado, el WannaCry tuvo un impacto sin precedentes. Se dice
+que alrededor 300.000 ordenadores fueron infectados en 150 paises. Russia,
+Ucrania, India y Taiwan fueron los paises más afectados.
+
+Al igual que en el primer ransomware conocido, el troyano SIDA, el sistema
+sanitario fue una de las partes que salió peor parada, en este caso los
+hospitales de el Servicio Nacional de Salud (National Health Service) de
+Inglaterra y Escocia. Lo preocupante de todo esto es que no se estaba explotando
+un 0-day (Zero-day, vulnerabilidad que el desarrollador ha tenido cero días para
+parchear), sino que *EternalBlue* ya había sido reportado. Cabe destacar que los
+300.000 ordenadores infectados ocurrió solo en 4 días gracias a que el
+*kill-switch* fue descubierto de manera prematura, pero podemos intuir que había
+muchas más máquinas desactualizadas (ya no solo que no tenían el último parche de
+seguridad, sino que muchos utilizaban Windows XP que no recibía actualizaciones desde 2014.
+
+No debemos olvidar que quien sea que lanzó el ataque, podría haber cambiado
+facilmente el *kill-switch* y lanzar una segunda oleada de ransomware cambiando
+el dominio que debía comprobar para continuar propagándose, pero por
+motivos que desconocemos prefirió dejarlo ahí.
+
+Se estima que las pérdidas económicas de este ransomware rondan los 4 billones
+de dolares americanos.
+
+# Atribución del ataque
+
+Tras analizar el ransomware, las pistas apuntan a que el ataque fue realizado
+por Corea del Norte. Se basan en los siguientes puntos:
+
+-   La máquina del atacante tenía archivos de *Hangul* instaladas. Esto es el
+    alfabeto coreano.
+-   Dichos archivos, además contenían metadatos. Estos metadatos establecen que
+    el ransomware fue creado en un ordenador que tenía como zona horaria
+    UTC+09:00, la zona horaria de Corea.
+-   El WannaCry tiene similaridades en cuanto a código con otros malware usado
+    en ciber ataques relacionados con Corea del Norte.
+
+Teniendo esto en cuenta, además de más información que probablemente sea
+clasificada, Estados Unidos atribuyó publicamente el ataque a Corea del Norte.
+Esta obviamente negó su implicación en el mismo. 
+
+Es muy dificil saber a ciencia cierta quien realizó el ataque debido al uso de
+criptodivisas y a como se propagaba el ataque por las propias máquinas
+infectadas. Además, no debe descartarse que todos los puntos citados
+anteriormente se hayan dejado a proposito para culpar a Corea del Norte del
+ataque por diferentes cuestiones políticas.
+
 # Conclusión
 
 # Bibliografia
 
 * [WannaCry Ransomware Attack. Wikipedia](https://en.wikipedia.org/wiki/WannaCry_ransomware_attack)
+* [AIDS (Trojan horse)](https://en.wikipedia.org/wiki/AIDS_%28Trojan_horse%29)
+* [CryptoLocker](https://en.wikipedia.org/wiki/CryptoLocker)
+* [First known ransomware attack in 1989 also targeted
+  healthcare](https://www.beckershospitalreview.com/healthcare-information-technology/first-known-ransomware-attack-in-1989-also-targeted-healthcare.html)
+* [Impact of WannaCry: Major disruption as organisations go back to
+  work](https://www.siliconrepublic.com/enterprise/wannacry-impact-organisations-attack)
 * [WannaCry Malware Profile. Fireeye](https://www.fireeye.com/blog/threat-research/2017/05/wannacry-malware-profile.html)
 * [WannaCry Ransomware: Analysis of Infection, Persistence, Recovery Prevention and Propagation Mechanisms.](https://www.il-pib.pl/czasopisma/JTIT/2019/1/113.pdf)
