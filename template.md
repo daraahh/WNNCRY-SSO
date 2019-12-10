@@ -17,7 +17,7 @@ listings-no-page-break: True
 
 Un ransomware es un tipo de malware que secuestra la información de la víctima y amenaza con publicarla o bloquear su acceso de forma permanente mediante su cifrado a menos que su rescate sea pagado. Dicho pago se hace normalmente a través de criptodivisas como Bitcoin, lo que dificulta el rastreo de los delincuentes.
 
-El ataque sucedido el 12 de mayo de 2017 que tuvo como protagonista al ransomware WannaCry ha sido descrito como sin precendentes y afectó a más de 230.000 computadoras de más de 150 países, incluyendo compañías importantes como Telefónica en España, FedEx e incluso departamentos del servicio nacional de salud de Gran Bretaña.
+El ataque sucedido el 12 de mayo de 2017 que tuvo como protagonista al ransomware WannaCry ha sido descrito como sin precedentes y afectó a más de 230.000 computadoras de más de 150 países, incluyendo compañías importantes como Telefónica en España, FedEx e incluso departamentos del servicio nacional de salud de Gran Bretaña.
 
 Es común encontrar descripciones que definen este malware como un criptogusano, esto es debido al comportamiento que refleja y lo que, probablemente, propició el gran alcance del ataque a nivel mundial. Esta característica es algo poco común respecto a otros ransomware, ya que lo normal es que los ataques de este tipo se lleven a cabo mediante troyanos que llegan a los equipos de las víctimas a través de campañas de phishing. Sin embargo WannaCry se expandía de forma automáticamente por los equipos de la red tras la infección de un equipo.
 
@@ -49,7 +49,7 @@ normalmente". A un nivel más técnico, la realidad es que se trataba de un
 malware bastante rudimentario. En ningún momento se cifraba el contenido de los
 archivos, sino que simplemente se cifraba su nombre. Esto hacía que su
 recuperación fuera muchísimo más asequible. Aún así, para la época, fue un gran
-ataque en un entorno que estaba poco preparado. Este ransomwere recibío el
+ataque en un entorno que estaba poco preparado. Este ransomware recibió el
 nombre de *AIDS Trojan* (troyano SIDA).
 
 A raíz de este primer ataque, se desarrollaron otros ya más avanzados como el
@@ -58,7 +58,7 @@ de 2013 y hasta junio de 2014 no pudo mitigarse completamente. Afectaba, igual
 que el caso anterior, a sistemas Windows (DOS). Es lógico, puesto que la mayoría
 de usuarios finales utilizan Windows como sistema operativo, que son los
 objetivos últimos de estos ataques. Se propagó mediante correo electrónico y
-también mediante máquinas que previamente pertenecian a una botnet. Cifraba
+también mediante máquinas que previamente pertenecían a una botnet. Cifraba
 archivos tanto locales como también aquellos a los que podía llegar a través de
 la red donde estaba conectado el usuario mediante criptografía asimétrica (RSA).
 Esto hacía que, aunque se obteniera la clave con la que el atacante había
@@ -75,7 +75,7 @@ directamente a la práctica para ver, a nivel de código, qué hacía y cómo.
 
 ## Análisis técnico de una muestra
 
-Para el desarrollo de esta parte, se ha realizado un **análisis estático** de una muestra del malware que se encuentra en el repositorio the Github [*TheZoo*](https://github.com/ytisf/theZoo). Las principales herramientas usadas son:
+Para el desarrollo de esta parte, se ha realizado un **análisis estático** de una muestra del malware que se encuentra en el repositorio de Github [*TheZoo*](https://github.com/ytisf/theZoo). Las principales herramientas usadas son:
 
 * [**Ghidra**](https://github.com/NationalSecurityAgency/ghidra): Framework de ingeniería inversa desarrollado por la NSA.
 * **wrestool**: Herramienta para la extracción de recursos en ejecutables Windows perteneciente al paquete *icoutils*.
@@ -109,7 +109,7 @@ Para extraer dicho recurso nosotros mismos, se hace uso de la herramienta *wrest
 
 ![Extracción del recurso 1831](imgs/wnncry_extract_1831.png)
 
-Cargado el ejecutable, repetimos el procedimiento renombrando variables y funciones de la función `main` obteniendo como resultado lo que aparace en la figura.
+Cargado el ejecutable, repetimos el procedimiento renombrando variables y funciones de la función `main` obteniendo como resultado lo que aparece en la figura.
 
 ![Función main 1813](imgs/wnncry_1813_main.png)
 
@@ -136,8 +136,8 @@ Por tanto, el malware ejecutaría dos etapas previas al cifrado de archivos en l
 # Impacto
 
 Como ya hemos mencionado, el WannaCry tuvo un impacto sin precedentes. Se dice
-que alrededor 300.000 ordenadores fueron infectados en 150 paises. Russia,
-Ucrania, India y Taiwan fueron los paises más afectados.
+que alrededor 300.000 ordenadores fueron infectados en 150 países. Rusia,
+Ucrania, India y Taiwán fueron los paises más afectados.
 
 Al igual que en el primer ransomware conocido, el troyano SIDA, el sistema
 sanitario fue una de las partes que salió peor parada, en este caso los
@@ -151,7 +151,7 @@ muchas más máquinas desactualizadas (ya no solo que no tenían el último parc
 seguridad, sino que muchos utilizaban Windows XP que no recibía actualizaciones desde 2014.
 
 No debemos olvidar que quien sea que lanzó el ataque, podría haber cambiado
-facilmente el *kill-switch* y lanzar una segunda oleada de ransomware cambiando
+fácilmente el *kill-switch* y lanzar una segunda oleada de ransomware cambiando
 el dominio que debía comprobar para continuar propagándose, pero por
 motivos que desconocemos prefirió dejarlo ahí.
 
@@ -172,13 +172,13 @@ por Corea del Norte. Se basan en los siguientes puntos:
     en ciber ataques relacionados con Corea del Norte.
 
 Teniendo esto en cuenta, además de más información que probablemente sea
-clasificada, Estados Unidos atribuyó publicamente el ataque a Corea del Norte.
+clasificada, Estados Unidos atribuyó públicamente el ataque a Corea del Norte.
 Esta obviamente negó su implicación en el mismo.
 
-Es muy dificil saber a ciencia cierta quien realizó el ataque debido al uso de
+Es muy difícil saber a ciencia cierta quien realizó el ataque debido al uso de
 criptodivisas y a como se propagaba el ataque por las propias máquinas
 infectadas. Además, no debe descartarse que todos los puntos citados
-anteriormente se hayan dejado a proposito para culpar a Corea del Norte del
+anteriormente se hayan dejado a propósito para culpar a Corea del Norte del
 ataque por diferentes cuestiones políticas.
 
 # Conclusión
@@ -187,9 +187,16 @@ Los ataques ransomware llevados a cabo por WannaCry tuvieron una gran repercusi�
 
 El caos informático, magnificado por los medios de comunicación y las redes sociales, quizás tuvo algo positivo, esto es que puso a debate el nivel de seguridad de los sistemas que nos rodean a diario y de los que depende nuestro ritmo de vida.
 
-WannaCry no fue un malware realmente sofisticado y, sin embargo, el mundo no estaba preparado.
+En cuanto a qué podemos hacer para protegernos como empresa o usuario, 
+está claro: nunca subestimar el
+ámbito de la ciberseguridad, mantener nuestros equipos actualizados y tener
+un plan de respuesta para actuar en caso de una catástrofe similar. Estar al día en cuanto
+a las noticias de ciberseguridad también es importante, de esta manera podemos
+saber qué tipo de amenazas hay actualmente y prepararnos al respecto.
 
-# Bibliografia
+WannaCry no fue un malware realmente sofisticado y, sin embargo, el mundo no estaba preparado. Nos hace plantearnos qué pasaría si se lanzara uno mucho más potente, con el objetivo no solo de recoger dinero sino de únicamente hacer daño. Si es cierto, como mencionamos en la atribución del ataque, que fue todo un plan ideado por Corea del Norte, es preocupante el poder que pueden llegar a tener los gobiernos. Llegará el punto en el que la fuerza militar de una nación no se mida por las armas nucleares que tiene o armas de destrucción masiva, sino por malware capaz de dejar a un adversario totalmente desconectado del mundo. A día de hoy es más importante la información que los territorios de un país, y la inversión de estos cada vez es mayor. Con casi total seguridad, la próxima guerra mundial se producirá en la red (si es que no se está llevando ya a cabo).
+
+# Bibliografía
 
 * [WannaCry Ransomware Attack. Wikipedia](https://en.wikipedia.org/wiki/WannaCry_ransomware_attack)
 * [AIDS (Trojan horse)](https://en.wikipedia.org/wiki/AIDS_%28Trojan_horse%29)
