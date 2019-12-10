@@ -65,7 +65,7 @@ Esto hacía que, aunque se obteniera la clave con la que el atacante había
 cifrado la información de la víctima con técnicas como la ingeniería inversa o
 se conociera el *kill-switch* para parar el ransomware, no
 se pudieran recuperar los datos cifrados puesto que se necesitaba la clave privada que se
-mantenía en los servidores del atacante. 
+mantenía en los servidores del atacante.
 
 
 # Funcionamiento del WannaCry
@@ -173,7 +173,7 @@ por Corea del Norte. Se basan en los siguientes puntos:
 
 Teniendo esto en cuenta, además de más información que probablemente sea
 clasificada, Estados Unidos atribuyó publicamente el ataque a Corea del Norte.
-Esta obviamente negó su implicación en el mismo. 
+Esta obviamente negó su implicación en el mismo.
 
 Es muy dificil saber a ciencia cierta quien realizó el ataque debido al uso de
 criptodivisas y a como se propagaba el ataque por las propias máquinas
@@ -182,6 +182,12 @@ anteriormente se hayan dejado a proposito para culpar a Corea del Norte del
 ataque por diferentes cuestiones políticas.
 
 # Conclusión
+
+Los ataques ransomware llevados a cabo por WannaCry tuvieron una gran repercusión mediática, quizás desmedida, y generaron una gran alarma social, afectando a grandes compañías que pudieron parecer intocables hasta ese momento.
+
+El caos informático, magnificado por los medios de comunicación y las redes sociales, quizás tuvo algo positivo, esto es que puso a debate el nivel de seguridad de los sistemas que nos rodean a diario y de los que depende nuestro ritmo de vida.
+
+WannaCry no fue un malware realmente sofisticado y, sin embargo, el mundo no estaba preparado.
 
 # Bibliografia
 
